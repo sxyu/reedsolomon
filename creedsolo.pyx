@@ -87,8 +87,8 @@ cimport cython
 from cython.parallel import parallel, prange
 
 import itertools
-from cpython cimport array
-
+import array
+cimport cpython.array as array
 
 ################### INIT and stuff ###################
 
@@ -106,7 +106,6 @@ class ReedSolomonError(Exception):
     pass
 
 ctypedef unsigned char uint8_t # equivalent to (but works with Microsoft C compiler which does not support C99): from libc.stdint cimport uint8_t
-cimport cpython.array as array
 
 cdef uint8_t[::1] gf_exp = bytearray([1] * 512) # For efficiency, gf_exp[] has size 2*GF_SIZE, so that a simple multiplication of two numbers can be resolved without calling % field_charac
 cdef uint8_t[::1] gf_log = bytearray([0] * 256)
